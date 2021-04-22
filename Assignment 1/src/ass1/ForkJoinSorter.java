@@ -2,18 +2,25 @@ package ass1;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.Future;
 import java.util.concurrent.RecursiveTask;
 
 public class ForkJoinSorter<T extends Comparable<? super T>> extends RecursiveTask<List<T>> {
 
+  // Threshold to determine when to delegate to a sequential sorter
   private static final int threshold = 20;
-  private List<T> toSort = new ArrayList<>();
+  // Need to keep the list to sort in a field as we cannot pass it into the compute() method
+  private List<T> toSort;
 
   public ForkJoinSorter(List<T> list){
     this.toSort = list;
   }
 
+  /**
+   * Sort method taken from the ISequentialSorter class to use in cases with elements less than the threshold
+   * @param list
+   * @param <T>
+   * @return
+   */
   public <T extends Comparable<? super T>> List<T> sequentialSort(List<T> list) {
     List<T>result=new ArrayList<>();
     for(T l:list){insert(result,l);}
@@ -28,6 +35,11 @@ public class ForkJoinSorter<T extends Comparable<? super T>> extends RecursiveTa
     list.add(elem);
   }
 
+  /**
+   * Sorts a list by splitting it in half, and merging the halves while recursively calling sort()
+   * on each half.
+   * @return
+   */
   @Override
   protected List<T> compute() {
     // Delegate to MSequentialSorter for cases with less than 20 elements
@@ -39,12 +51,12 @@ public class ForkJoinSorter<T extends Comparable<? super T>> extends RecursiveTa
     int mid = toSort.size()/2;
 
     // Fork each half of the merge-sort.
-    // Recursively calls sort() on the 'left' and 'right' halves.
+    // Recursively sorts the list by using the compute method of RecursiveTask
     ForkJoinSorter<T> left = new ForkJoinSorter(toSort.subList(0,mid));
     ForkJoinSorter<T> right = new ForkJoinSorter(toSort.subList(mid,toSort.size()));
+    invokeAll(left,right);
 
     // Return the 2 halves of a list merged together.
-    invokeAll(left,right);
     return merge(left.join(),right.join());
   }
 

@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="ass1" />
+    </artifacts-to-build>
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="a1e64985-e54e-47f1-868e-ace459d29798" name="Default Changelist" comment="" />
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -15,30 +19,34 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/NWEN303" />
+  </component>
   <component name="ProjectId" id="1pBecYVgK3hGxmoykpCGPO8CWm5" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent">
     <property name="Downloaded.Files.Path.Enabled" value="false" />
     <property name="Repository.Attach.Annotations" value="false" />
     <property name="Repository.Attach.JavaDocs" value="false" />
     <property name="Repository.Attach.Sources" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../2020/Tri 2/SWEN225/Assignment 2" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Assignment 2" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="configurable.group.other" />
   </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
-  </component>
   <component name="RunManager" selected="JUnit.TestPerformance">
-    <configuration name="MergeSort" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="ass1.MergeSort" />
+    <configuration name="MParallelSorter1" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="ass1.MParallelSorter1" />
       <module name="Assignment 1" />
       <extension name="coverage">
         <pattern>
@@ -95,7 +103,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TestPoint" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="TestString" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Assignment 1" />
       <extension name="coverage">
         <pattern>
@@ -104,7 +112,7 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="ass1" />
-      <option name="MAIN_CLASS_NAME" value="ass1.TestPoint" />
+      <option name="MAIN_CLASS_NAME" value="ass1.TestString" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -113,10 +121,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.TestPerformance" />
+        <item itemvalue="JUnit.TestString" />
+        <item itemvalue="Application.MParallelSorter1" />
         <item itemvalue="JUnit.TestBigInteger" />
         <item itemvalue="JUnit.TestFloat" />
-        <item itemvalue="JUnit.TestPoint" />
-        <item itemvalue="Application.MergeSort" />
       </list>
     </recent_temporary>
   </component>
@@ -130,7 +138,56 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1614660990843</updated>
+      <workItem from="1616127366519" duration="10012000" />
+      <workItem from="1618894908088" duration="2060000" />
+      <workItem from="1618981076280" duration="647000" />
+      <workItem from="1619065771838" duration="959000" />
     </task>
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="2" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="587" y="282" width="424" height="483" key="FileChooserDialogImpl" timestamp="1619067446536">
+      <screen x="0" y="0" width="1920" height="1044" />
+    </state>
+    <state x="587" y="282" width="424" height="483" key="FileChooserDialogImpl/0.0.1920.1044@0.0.1920.1044" timestamp="1619067446536" />
+    <state width="914" height="264" key="GridCell.Tab.0.bottom" timestamp="1616137991717">
+      <screen x="0" y="0" width="1920" height="1044" />
+    </state>
+    <state width="914" height="264" key="GridCell.Tab.0.bottom/0.0.1920.1044@0.0.1920.1044" timestamp="1616137991717" />
+    <state width="914" height="264" key="GridCell.Tab.0.center" timestamp="1616137991716">
+      <screen x="0" y="0" width="1920" height="1044" />
+    </state>
+    <state width="914" height="264" key="GridCell.Tab.0.center/0.0.1920.1044@0.0.1920.1044" timestamp="1616137991716" />
+    <state width="914" height="264" key="GridCell.Tab.0.left" timestamp="1616137991715">
+      <screen x="0" y="0" width="1920" height="1044" />
+    </state>
+    <state width="914" height="264" key="GridCell.Tab.0.left/0.0.1920.1044@0.0.1920.1044" timestamp="1616137991715" />
+    <state width="914" height="264" key="GridCell.Tab.0.right" timestamp="1616137991716">
+      <screen x="0" y="0" width="1920" height="1044" />
+    </state>
+    <state width="914" height="264" key="GridCell.Tab.0.right/0.0.1920.1044@0.0.1920.1044" timestamp="1616137991716" />
+    <state x="617" y="123" key="SettingsEditor" timestamp="1619067448730">
+      <screen x="0" y="0" width="1920" height="1044" />
+    </state>
+    <state x="617" y="123" key="SettingsEditor/0.0.1920.1044@0.0.1920.1044" timestamp="1619067448730" />
+    <state x="668" y="416" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD" timestamp="1616127420038">
+      <screen x="0" y="0" width="1920" height="1044" />
+    </state>
+    <state x="668" y="416" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD/0.0.1920.1044@0.0.1920.1044" timestamp="1616127420038" />
   </component>
 </project>

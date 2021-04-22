@@ -7,9 +7,25 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
+/**
+ * The benefit of using Futures is that the algorithm is faster in cases with a large number of elements (i.e because
+ * it is now parallel) and that we have greater control of how we want to deal with execution and exceptions) and we have
+ * control over the detail of execution because we have to specify when we want the algorithm to fork when using Futures
+ * (in my case, forking when we sort of the 'left' and 'right' halves of the list'). We have control over how we deal
+ * with exceptions because we can write a personalised get() method to handle exceptions when retrieving the value from
+ * a Future. We can also control how we want to deal with threads depending on the type of ThreadPool used (i.e fixed
+ * and cached). I have opted to use a CachedThreadPool because this means that the code will automatically create
+ * threads as needed and we don't require knowledge of the processor the algorithm is being run on to determine what
+ * size we should make a FixedThreadPool. From implementing the algorithm using Futures I've learnt that using a custom
+ * get() method was preferable, as I could separate exception handling from the main algorithm (i.e didn't need to use a
+ * try catch in the sort() method or add exceptions to the sort() method signature).
+ */
+
 public class MParallelSorter1 implements Sorter {
   // Thread pool for using Futures
   private static final ExecutorService pool = Executors.newCachedThreadPool();
+  // Threshold to determine when to delegate to a sequential sorter
+  private static final int threshold = 20;
 
   /**
    * Sorts a list by splitting it in half, and merging the halves while recursively calling sort()
@@ -29,8 +45,8 @@ public class MParallelSorter1 implements Sorter {
       return listCopy;
     }
 
-    // Delegate to MSequentialSorter for cases with less than 20 elements
-    if(listCopy.size() < 20){
+    // Delegate to MSequentialSorter for cases with elements less than the threshold
+    if(listCopy.size() < threshold){
       MSequentialSorter sequentialSorter = new MSequentialSorter();
       return sequentialSorter.sort(listCopy);
     }

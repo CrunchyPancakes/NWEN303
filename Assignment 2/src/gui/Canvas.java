@@ -8,12 +8,13 @@ import java.awt.Toolkit;
 
 import javax.swing.JPanel;
 
+import model.AbstractModel;
 import model.DrawableParticle;
 import model.Model;
 
 @SuppressWarnings("serial")
 public class Canvas extends JPanel{
-  Model m; Canvas(Model m){this.m=m;}
+  AbstractModel m; Canvas(AbstractModel m){this.m=m;}
   @Override public void paint(Graphics gg){
 	super.paint(gg);
     Graphics2D g=(Graphics2D)gg;
@@ -23,6 +24,6 @@ public class Canvas extends JPanel{
     Toolkit.getDefaultToolkit().sync();
   }
   @Override public Dimension getPreferredSize(){
-    return new Dimension((int)Model.size, (int)Model.size);
+    return new Dimension((int)AbstractModel.size, (int)AbstractModel.size);
     }
 }

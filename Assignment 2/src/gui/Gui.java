@@ -7,6 +7,7 @@ import java.util.concurrent.TimeUnit;
 import javax.swing.*;
 
 import datasets.DataSetLoader;
+import model.AbstractModel;
 import model.Model;
 @SuppressWarnings("serial")
 public class Gui extends JFrame implements Runnable{
@@ -15,8 +16,8 @@ public class Gui extends JFrame implements Runnable{
 
   public static final ScheduledThreadPoolExecutor schedulerRepaint = new ScheduledThreadPoolExecutor(1);
   public static final ScheduledThreadPoolExecutor schedulerSimulation = new ScheduledThreadPoolExecutor(1);
-  Model m;
-  Gui(Model m){this.m=m;}
+  AbstractModel m;
+  Gui(AbstractModel m){this.m=m;}
   public void run() {
     setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     getRootPane().setLayout(new BorderLayout());
@@ -37,7 +38,7 @@ public class Gui extends JFrame implements Runnable{
       );
     }
   private static final class MainLoop implements Runnable {
-    Model m;MainLoop(Model m){this.m=m;}
+    AbstractModel m;MainLoop(AbstractModel m){this.m=m;}
     public void run() {
       try{
         while(true){
@@ -56,15 +57,17 @@ public class Gui extends JFrame implements Runnable{
       }
     }
   public static void main(String[] args) {
-    //Model m=DataSetLoader.getRegularGrid(100, 800, 40);//Try those configurations
-    //Model m=DataSetLoader.getRandomRotatingGrid(0.02d,100, 800, 40);
-    //Model m=DataSetLoader.getRandomRotatingGrid(0.02d,100, 800, 30);
-    Model m=DataSetLoader.getElaborate(200, 700, 2,0.99);
-    //Model m=DataSetLoader.getElaborate(200, 700, 2,0.99005);
-    //Model m=DataSetLoader.getElaborate(200, 700, 2,0.99008);
-    //Model m=DataSetLoader.getRandomSet(100, 800, 1000);
-    //Model m=DataSetLoader.getRandomSet(100, 800, 100);
-    //Model m=DataSetLoader.getRandomGrid(100, 800, 30);
+    //AbstractModel m=f//Try those configurations
+//    AbstractModel m=DataSetLoader.getRandomRotatingGrid(0.02d,100, 800, 40);
+    //AbstractModel m=DataSetLoader.getRandomRotatingGrid(0.02d,100, 800, 30);
+//    AbstractModel m=DataSetLoader.getElaborateParallel(200, 700, 2,0.99);
+    //AbstractModel m=DataSetLoader.getElaborate(200, 700, 2,0.99005);
+    //AbstractModel m=DataSetLoader.getElaborate(200, 700, 2,0.99008);
+    //AbstractModel m=DataSetLoader.getRandomSet(100, 800, 1000);
+    //AbstractModel m=DataSetLoader.getRandomSet(100, 800, 100);
+    //AbstractModel m=DataSetLoader.getRandomGrid(100, 800, 30);
+//    AbstractModel m = DataSetLoader.getRegularGrid(500, 1500, 30);
+    AbstractModel m = DataSetLoader.getRegularGridParallel(500, 1500, 30);
     schedulerSimulation.schedule(new MainLoop(m), 500, TimeUnit.MILLISECONDS);
     SwingUtilities.invokeLater(new Gui(m));
 

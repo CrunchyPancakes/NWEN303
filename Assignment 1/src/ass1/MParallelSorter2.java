@@ -3,14 +3,21 @@ package ass1;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
 
+
+/**
+ *  The benefit of using CompletableFutures is that it is better at handling larger datasets (because it is parallel)
+ *  and it makes use of work-stealing. By using work stealing, the algorithm becomes non-blocking because 'workers' are
+ *  able to take 'tasks' from the other workers queues if a worker no longer has tasks in its own queue. This means that
+ *  merge() does not block when we use the thenCombine() method to pass the left and right halves of the list into
+ *  merge(). CompletableFutures can also be 'manually' completed, although that hasn't been used in this case. I've
+ *  learnt that using a ThreadPool isn't necessary for CompletableFutures as this is handled automatically and it
+ *  actually made my algorithm perform slower (my initial implementation of the CompletableFutures algorithm used a
+ *  ThreadPool that I created).
+ */
 public class MParallelSorter2 implements Sorter {
-  // Thread pool for using Futures
-  private static final ExecutorService pool = Executors.newCachedThreadPool();
+  // Threshold to determine when to delegate to a sequential sorter
+  private static final int threshold = 20;
 
   /**
    * Sorts a list by splitting it in half, and merging the halves while recursively calling sort()
@@ -30,8 +37,8 @@ public class MParallelSorter2 implements Sorter {
       return listCopy;
     }
 
-    // Delegate to MSequentialSorter for cases with less than 20 elements
-    if(listCopy.size() < 20){
+    // Delegate to MSequentialSorter for cases with elements less than the threshold
+    if(listCopy.size() < threshold){
       MSequentialSorter sequentialSorter = new MSequentialSorter();
       return sequentialSorter.sort(listCopy);
     }
@@ -42,11 +49,8 @@ public class MParallelSorter2 implements Sorter {
 
     // Fork each half of the merge-sort.
     // Recursively calls sort() on the 'left' and 'right' halves.
-//    Future<List<T>> left = pool.submit(() -> sort(listCopy.subList(0,mid)));
-//    List<T> right = sort(listCopy.subList(mid,listCopy.size()));
-
-    CompletableFuture<List<T>> left = CompletableFuture.supplyAsync(() -> sort(listCopy.subList(0,mid)), pool);
-    CompletableFuture<List<T>> right = CompletableFuture.supplyAsync(() -> sort(listCopy.subList(mid, listCopy.size())), pool);
+    CompletableFuture<List<T>> left = CompletableFuture.supplyAsync(() -> sort(listCopy.subList(0,mid)));
+    CompletableFuture<List<T>> right = CompletableFuture.supplyAsync(() -> sort(listCopy.subList(mid, listCopy.size())));
     CompletableFuture<List<T>> merged = left.thenCombine(right, (l,r) -> {
       return merge(l,r);
     });
@@ -84,32 +88,4 @@ public class MParallelSorter2 implements Sorter {
     merged.addAll(right.subList(rightIndex, right.size()));
     return merged;
   }
-
-  /**
-   * Personalised get method for Futures.
-   * Based on method from lecture 4.
-   * @param f
-   * @param <T>
-   * @return
-   */
-  public static <T extends Comparable<? super T>> List<T> get(Future<List<T>>f) {
-    try {return f.get();}
-    catch (InterruptedException e) {//we do not expect it
-      Thread.currentThread().interrupt();//just do it :(
-      throw new Error(e);//turn it into an error
-    }
-    catch (ExecutionException e) {
-      Throwable t=e.getCause();//propagate unchecked exceptions
-      if(t instanceof RuntimeException) {
-        throw (RuntimeException)t;
-      }//note: CancellationException is a RuntimeException
-      if(t instanceof Error) {
-        throw (Error)t;
-      }
-      throw new Error("Unexpected Checked Exception",t);
-      //our callable/closure did throw a checked exception
-    }
-  }
-
-
 }
